@@ -25,6 +25,7 @@ class SingleProduct extends React.Component {
 
   handleIncrement = (product) => {
     const token = localStorage.getItem('token');
+    console.log({ token });
     if (token) {
       let currentQuantity = this.props.cart.products[product.id] || 0;
       this.props.updateCart(
@@ -34,7 +35,7 @@ class SingleProduct extends React.Component {
         currentQuantity + parseInt(this.state.quantity)
       );
     } else {
-      this.props.incrementItem(product.id);
+      this.props.incrementItem(product.id, parseInt(this.state.quantity));
     }
   };
 
