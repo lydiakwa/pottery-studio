@@ -1,24 +1,15 @@
 import axios from 'axios';
 
 import { setCart } from './cart';
-/**
- * ACTION TYPES
- */
+
 const SET_AUTH = 'SET_AUTH';
 const CLEAR_AUTH = 'CLEAR_AUTH';
 
-/**
- * ACTION CREATORS
- */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 export const logout = () => {
   return { type: CLEAR_AUTH };
 };
-
-/**
- * THUNK CREATORS
- */
 
 export const loginUser = (formData, navigate) => {
   return async (dispatch) => {

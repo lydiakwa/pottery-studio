@@ -1,9 +1,5 @@
 const { db, Product, User, Cart, CartProduct } = require('./server/db/index');
 
-// console.log('PRODUCT METHODS:', Object.keys(Product.prototype));
-// console.log('USER METHODS:', Object.keys(User.prototype));
-// console.log('CART METHODS:', Object.keys(Cart.prototype));
-
 const seed = async () => {
   try {
     await db.sync({ force: true });
