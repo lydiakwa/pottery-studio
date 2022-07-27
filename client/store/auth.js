@@ -20,14 +20,15 @@ export const logout = () => {
  * THUNK CREATORS
  */
 
-export const loginUser = (formData, history) => {
+export const loginUser = (formData, navigate) => {
   return async (dispatch) => {
     try {
+      console.log({ formData });
       const { data } = await axios.post('/api/auth/login', formData);
       dispatch(setAuth(data.user));
       localStorage.setItem('token', data.user.token);
       if (data.user.isAdmin === true) {
-        history.push('/admin');
+        navigate('/admin');
       } else {
         const cart = {
           cartId: data.cart.id,
@@ -42,8 +43,6 @@ export const loginUser = (formData, history) => {
         dispatch(setCart(cart));
         history.push('/');
       }
-
-
     } catch (err) {
       console.log(err);
     }

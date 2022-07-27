@@ -20,8 +20,8 @@ const seed = async () => {
     const john = await User.create({
       firstName: 'John',
       lastName: 'Jones',
-      email: 'JohnJones@gmail.com',
-      password: 'testing12345',
+      email: 'k@gmail.com',
+      password: 't',
       address: '91 5th Ave, NY, NY 10011',
     });
     const noCart = await User.create({

@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('THIS.PROPS', this.props);
+    console.log('STATE:', this.state);
     return (
       <Router>
         <div>
@@ -69,7 +69,7 @@ class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={CreateAccount} />
                 <Route exact path="/checkout" component={Checkout} />
-              <Route exact path="/confirmation" component={Confirmation} />
+                <Route exact path="/confirmation" component={Confirmation} />
               </Switch>
             )}
           </main>
