@@ -93,19 +93,4 @@ function SingleProduct(props) {
   );
 }
 
-// const mapState = (state) => ({
-//   product: state.singleProduct,
-//   cart: state.cart,
-// });
-
-const mapDispatch = (dispatch) => {
-  return {
-    loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-    incrementItem: (productId, quantity) =>
-      dispatch(incrementItem(productId, quantity)),
-    updateCart: (token, cartId, productId, quantity) =>
-      dispatch(updateCart(token, cartId, productId, quantity)),
-  };
-};
-
 export default SingleProduct;
