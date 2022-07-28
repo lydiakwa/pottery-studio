@@ -54,6 +54,7 @@ class App extends React.Component {
               <Routes>
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/" element={<Home />} />
+                <Route path="/aboutus" element={<AboutUs />} />
                 <Route path="/shop" element={<AllProducts />} />
                 <Route path="/products/:id" element={<SingleProduct />} />
                 <Route path="/cart" element={<Cart />} />

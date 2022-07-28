@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ function CreateAccount() {
               name="firstName"
               type="text"
               onChange={handleChange}
-              value={firstName}
+              value={formState.firstName}
             />
           </div>
           <div className="col">
@@ -51,7 +51,7 @@ function CreateAccount() {
               name="lastName"
               type="text"
               onChange={handleChange}
-              value={lastName}
+              value={formState.lastName}
             />
           </div>
         </div>
@@ -66,7 +66,7 @@ function CreateAccount() {
               name="email"
               type="text"
               onChange={handleChange}
-              value={email}
+              value={formState.email}
             />
           </div>
           <div className="col">
@@ -78,7 +78,7 @@ function CreateAccount() {
               name="password"
               type="text"
               onChange={handleChange}
-              value={password}
+              value={formState.password}
             />
           </div>
         </div>
