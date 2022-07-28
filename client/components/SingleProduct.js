@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { fetchSingleProduct } from '../store/singleProduct';
 import { incrementItem, updateCart } from '../store/cart';
 
-function SingleProduct(props) {
+function SingleProduct() {
   const cart = useSelector((state) => state.cart);
   const product = useSelector((state) => state.singleProduct);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const { id: urlId } = useParams();
 
   useEffect(() => {
-    dispatch(fetchSingleProduct(props.match.params.id));
-  }, []);
+    dispatch(fetchSingleProduct(urlId));
+  }, [urlId]);
 
   const handleChange = (evt) => {
     setQuantity(evt.target.value);
@@ -20,7 +22,6 @@ function SingleProduct(props) {
 
   const handleIncrement = (product) => {
     const token = localStorage.getItem('token');
-    console.log({ token });
     if (token) {
       let currentQuantity = cart.products[product.id] || 0;
       dispatch(

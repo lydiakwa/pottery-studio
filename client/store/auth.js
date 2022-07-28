@@ -32,7 +32,7 @@ export const loginUser = (formData, navigate) => {
         }
 
         dispatch(setCart(cart));
-        history.push('/');
+        navigate('/');
       }
     } catch (err) {
       console.log(err);
@@ -68,7 +68,7 @@ export const autoLogin = (token) => {
 };
 
 //creates a new user in the uesr model
-export const createUser = (user, history) => {
+export const createUser = (user, navigate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post('/api/users', user);
@@ -87,7 +87,7 @@ export const createUser = (user, history) => {
       dispatch(setCart(cart));
 
       localStorage.setItem('token', data.user.token);
-      history.push('/');
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
