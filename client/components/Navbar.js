@@ -13,7 +13,6 @@ class Navbar extends React.Component {
     let count = 0;
     if (this.props.cart.products !== null) {
       Object.entries(this.props.cart.products).forEach((productArray) => {
-        console.log('prod:', productArray[1]);
         count += productArray[1];
       });
     }

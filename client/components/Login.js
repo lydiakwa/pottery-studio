@@ -36,7 +36,7 @@ function Login() {
                 name="email"
                 onChange={handleChange}
                 type="text"
-                value={email}
+                value={formState.email}
               />
             </div>
             <div>
@@ -48,7 +48,7 @@ function Login() {
                 onChange={handleChange}
                 type="password"
                 className="form-control"
-                value={password}
+                value={formState.password}
               />
             </div>
             <div>
