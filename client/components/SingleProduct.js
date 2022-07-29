@@ -1,116 +1,97 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { fetchSingleProduct } from '../store/singleProduct';
 import { incrementItem, updateCart } from '../store/cart';
 
-class SingleProduct extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      quantity: 1,
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+function SingleProduct() {
+  const cart = useSelector((state) => state.cart);
+  const product = useSelector((state) => state.singleProduct);
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const { id: urlId } = useParams();
 
-  componentDidMount() {
-    this.props.loadSingleProduct(this.props.match.params.id);
-  }
+  useEffect(() => {
+    dispatch(fetchSingleProduct(urlId));
+  }, [urlId]);
 
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    });
-  }
+  const handleChange = (evt) => {
+    setQuantity(evt.target.value);
+  };
 
-  handleIncrement = (product) => {
+  const handleIncrement = (product) => {
     const token = localStorage.getItem('token');
     if (token) {
-      let currentQuantity = this.props.cart.products[product.id] || 0;
-      this.props.updateCart(
-        token,
-        this.props.cart.cartId,
-        product.id,
-        currentQuantity + parseInt(this.state.quantity)
+      let currentQuantity = cart.products[product.id] || 0;
+      dispatch(
+        updateCart(
+          token,
+          cart.cartId,
+          product.id,
+          currentQuantity + parseInt(quantity)
+        )
       );
     } else {
-      this.props.incrementItem(product.id);
+      dispatch(incrementItem(product.id, parseInt(quantity)));
     }
   };
 
-  render() {
-    const { title, price, type, colour, imgUrl, description, id } =
-      this.props.product;
+  const { title, price, type, colour, imgUrl, description, id } = product;
 
-    return (
-      <div className="container single-product-container">
-        <div className="row align-items-center">
-          <div className="col-md-6">
-            <img
-              className="img-fluid"
-              src={imgUrl}
-              style={{ width: '500px', height: 'auto' }}
-            />
+  return (
+    <div className="container single-product-container">
+      <div className="row align-items-center">
+        <div className="col-md-6">
+          <img
+            className="img-fluid"
+            src={imgUrl}
+            style={{ width: '500px', height: 'auto' }}
+          />
+        </div>
+
+        <div className="col-md-6 single-product-content">
+          <h2 className="title">{title}</h2>
+          <p className="price">${price}</p>
+
+          <div className="quantity">
+            <label htmlFor="quantity">QUANTITY:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="0"
+              style={{ width: '60px', height: 'auto' }}
+              value={quantity}
+              onChange={handleChange}
+            ></input>
           </div>
 
-          <div className="col-md-6 single-product-content">
-            <h2 className="title">{title}</h2>
-            <p className="price">${price}</p>
+          <button
+            className="btn btn-dark"
+            onClick={() => handleIncrement(product)}
+          >
+            ADD TO CART <i className="bi bi-cart"></i>
+          </button>
 
-            <div className="quantity">
-              <label htmlFor="quantity">QUANTITY:</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                style={{ width: '60px', height: 'auto' }}
-                value={this.state.quantity}
-                onChange={this.handleChange}
-              ></input>
-            </div>
-
-            <button
-              className="btn btn-dark"
-              onClick={() => this.handleIncrement(this.props.product)}
-            >
-              ADD TO CART <i className="bi bi-cart"></i>
-            </button>
-
-            <div className="description">
-              <p>
-                <span>Type: </span>
-                {type}
-              </p>
-              <p>
-                <span>Colour: </span>
-                {colour}
-              </p>
-              <p>
-                <span>Description: </span>
-              </p>
-              <p>{description}</p>
-            </div>
+          <div className="description">
+            <p>
+              <span>Type: </span>
+              {type}
+            </p>
+            <p>
+              <span>Colour: </span>
+              {colour}
+            </p>
+            <p>
+              <span>Description: </span>
+            </p>
+            <p>{description}</p>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapState = (state) => ({
-  product: state.singleProduct,
-  cart: state.cart,
-});
-
-const mapDispatch = (dispatch) => {
-  return {
-    loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-    incrementItem: (productId, quantity) =>
-      dispatch(incrementItem(productId, quantity)),
-    updateCart: (token, cartId, productId, quantity) =>
-      dispatch(updateCart(token, cartId, productId, quantity)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(SingleProduct);
+export default SingleProduct;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Home from '../client/components/Home';
@@ -31,46 +31,38 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('THIS.PROPS', this.props);
     return (
       <Router>
         <div>
           <Navbar />
           <main>
             {this.props.auth.isAdmin === true ? (
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/shop" component={AllProducts} />
-                <Route
-                  exact
-                  path="/products/create"
-                  component={CreateProduct}
-                />
-                <Route
-                  exact
-                  path="/products/:id/edit"
-                  component={EditProduct}
-                />
-                <Route exact path="/products/:id" component={SingleProduct} />
-                <Route exact path="/cart" component={Cart} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={CreateAccount} />
-                <Route exact path="/admin" component={AdminHome} />
-                <Route exact path="/admin/login" component={AdminLogin} />
-                <Route exact path="/admin/users" component={AllUsers} />
-              </Switch>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<AllProducts />} />
+                <Route path="/products/create" element={<CreateProduct />} />
+                <Route path="/products/:id/edit" element={<EditProduct />} />
+                <Route path="/products/:id" element={<SingleProduct />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<CreateAccount />} />
+                <Route path="/admin" element={<AdminHome />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/users" element={<AllUsers />} />
+              </Routes>
             ) : (
-              <Switch>
-                <Route exact path="/admin/login" component={AdminLogin} />
-                <Route exact path="/" component={Home} />
-                <Route exact path="/shop" component={AllProducts} />
-                <Route exact path="/products/:id" component={SingleProduct} />
-                <Route exact path="/cart" component={Cart} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={CreateAccount} />
-                <Route exact path="/checkout" component={Checkout} />
-              <Route exact path="/confirmation" component={Confirmation} />
-              </Switch>
+              <Routes>
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/aboutus" element={<AboutUs />} />
+                <Route path="/shop" element={<AllProducts />} />
+                <Route path="/products/:id" element={<SingleProduct />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<CreateAccount />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/confirmation" element={<Confirmation />} />
+              </Routes>
             )}
           </main>
         </div>

@@ -1,33 +1,25 @@
 import axios from 'axios';
 
 import { setCart } from './cart';
-/**
- * ACTION TYPES
- */
+
 const SET_AUTH = 'SET_AUTH';
 const CLEAR_AUTH = 'CLEAR_AUTH';
 
-/**
- * ACTION CREATORS
- */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 export const logout = () => {
   return { type: CLEAR_AUTH };
 };
 
-/**
- * THUNK CREATORS
- */
-
-export const loginUser = (formData, history) => {
+export const loginUser = (formData, navigate) => {
   return async (dispatch) => {
     try {
+      console.log({ formData });
       const { data } = await axios.post('/api/auth/login', formData);
       dispatch(setAuth(data.user));
       localStorage.setItem('token', data.user.token);
       if (data.user.isAdmin === true) {
-        history.push('/admin');
+        navigate('/admin');
       } else {
         const cart = {
           cartId: data.cart.id,
@@ -40,10 +32,8 @@ export const loginUser = (formData, history) => {
         }
 
         dispatch(setCart(cart));
-        history.push('/');
+        navigate('/');
       }
-
-
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +68,7 @@ export const autoLogin = (token) => {
 };
 
 //creates a new user in the uesr model
-export const createUser = (user, history) => {
+export const createUser = (user, navigate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post('/api/users', user);
@@ -97,7 +87,7 @@ export const createUser = (user, history) => {
       dispatch(setCart(cart));
 
       localStorage.setItem('token', data.user.token);
-      history.push('/');
+      navigate('/');
     } catch (err) {
       console.log(err);
     }

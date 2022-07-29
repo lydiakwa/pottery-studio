@@ -1,9 +1,5 @@
 const { db, Product, User, Cart, CartProduct } = require('./server/db/index');
 
-// console.log('PRODUCT METHODS:', Object.keys(Product.prototype));
-// console.log('USER METHODS:', Object.keys(User.prototype));
-// console.log('CART METHODS:', Object.keys(Cart.prototype));
-
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -20,8 +16,8 @@ const seed = async () => {
     const john = await User.create({
       firstName: 'John',
       lastName: 'Jones',
-      email: 'JohnJones@gmail.com',
-      password: 'testing12345',
+      email: 'k@gmail.com',
+      password: 't',
       address: '91 5th Ave, NY, NY 10011',
     });
     const noCart = await User.create({
