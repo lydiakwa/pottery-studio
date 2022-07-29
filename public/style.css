@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap'); */
 
+#app {
+  height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   font-family: 'Quicksand', sans-serif;
   padding-top: 75px;

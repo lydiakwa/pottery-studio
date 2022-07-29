@@ -12,6 +12,7 @@ import Cart from '../client/components/Cart';
 import CreateAccount from './components/CreateAccount';
 import Checkout from './components/checkout/Checkout';
 import Confirmation from './components/checkout/Confirmation';
+import Footer from './components/Footer';
 
 import { autoLogin } from './store/auth';
 
@@ -33,39 +34,38 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
-          <Navbar />
-          <main>
-            {this.props.auth.isAdmin === true ? (
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<AllProducts />} />
-                <Route path="/products/create" element={<CreateProduct />} />
-                <Route path="/products/:id/edit" element={<EditProduct />} />
-                <Route path="/products/:id" element={<SingleProduct />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<CreateAccount />} />
-                <Route path="/admin" element={<AdminHome />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/users" element={<AllUsers />} />
-              </Routes>
-            ) : (
-              <Routes>
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/aboutus" element={<AboutUs />} />
-                <Route path="/shop" element={<AllProducts />} />
-                <Route path="/products/:id" element={<SingleProduct />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<CreateAccount />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/confirmation" element={<Confirmation />} />
-              </Routes>
-            )}
-          </main>
-        </div>
+        <Navbar />
+        <main>
+          {this.props.auth.isAdmin === true ? (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<AllProducts />} />
+              <Route path="/products/create" element={<CreateProduct />} />
+              <Route path="/products/:id/edit" element={<EditProduct />} />
+              <Route path="/products/:id" element={<SingleProduct />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<CreateAccount />} />
+              <Route path="/admin" element={<AdminHome />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/users" element={<AllUsers />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/shop" element={<AllProducts />} />
+              <Route path="/products/:id" element={<SingleProduct />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<CreateAccount />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/confirmation" element={<Confirmation />} />
+            </Routes>
+          )}
+        </main>
+        <Footer />
       </Router>
     );
   }
