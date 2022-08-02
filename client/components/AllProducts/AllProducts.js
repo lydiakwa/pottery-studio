@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchProducts, deleteProduct } from '../../store/products';
+import { fetchProducts } from '../../store/products';
 import { incrementItem, updateCart } from '../../store/cart';
 
 import GuestProducts from './GuestProducts';

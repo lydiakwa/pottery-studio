@@ -57,7 +57,7 @@ function AdminNavBar({ handleClick, isLoggedIn }) {
                     localStorage.removeItem('token');
                   }}
                 >
-                  Logout <i class="bi bi-box-arrow-right"></i>
+                  Logout <i className="bi bi-box-arrow-right"></i>
                 </Link>
               </li>
             ) : (

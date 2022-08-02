@@ -25,7 +25,7 @@ export const fetchSingleProduct = (id) => {
   };
 };
 
-export const updateProduct = (product, history) => {
+export const updateProduct = (product, navigate) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
@@ -39,7 +39,7 @@ export const updateProduct = (product, history) => {
         }
       );
       dispatch(updatedProduct(updated));
-      history.push('/shop')
+      navigate('/shop');
     } catch (err) {
       console.log(err);
     }

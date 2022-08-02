@@ -75,7 +75,7 @@ function GuestNavBar({ handleClick, isLoggedIn, cart }) {
                     localStorage.removeItem('cart');
                   }}
                 >
-                  Logout <i class="bi bi-box-arrow-right"></i>
+                  Logout <i className="bi bi-box-arrow-right"></i>
                 </button>
               </Link>
             ) : (
