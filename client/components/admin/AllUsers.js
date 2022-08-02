@@ -1,21 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers } from '../../store/users';
 import { autoLogin } from '../../store/auth';
 
-export class AllUsers extends React.Component {
-  componentDidMount() {
-    this.props.getUsers();
-  }
+function AllUsers() {
+  const auth = useSelector((state) => state.auth);
+  const users = useSelector((state) => state.users);
 
-  render() {
-    const { users } = this.props;
-    console.log("ALLUSERS",users);
+  const dispatch = useDispatch();
 
-    return (
-      <div className="container">
-        {this.props.auth.isAdmin ? (
-          <div>
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+  return (
+    <div className="container">
+      {auth.isAdmin ? (
+        <div>
           <h2>All Users</h2>
 
           <table className="table mt-5">
@@ -29,7 +30,7 @@ export class AllUsers extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {users.map(user => (
+              {users.map((user) => (
                 <>
                   <tr key={user.id}>
                     {/* <th scope="row">{user.id}</th> */}
@@ -42,21 +43,15 @@ export class AllUsers extends React.Component {
               ))}
             </tbody>
           </table>
-          </div>
-        ) : null }
-      </div>
-    )
-  }
+        </div>
+      ) : null}
+    </div>
+  );
 }
-
-const mapState = (state) => ({
-  auth: state.auth,
-  users: state.users,
-});
 
 const mapDispatch = (dispatch) => ({
   autoLogin: (token) => dispatch(autoLogin(token)),
-  getUsers: () => dispatch(fetchUsers())
+  getUsers: () => dispatch(fetchUsers()),
 });
 
-export default connect(mapState, mapDispatch)(AllUsers);
+export default AllUsers;

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AdminNavBar({ handleClick, isLoggedIn }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <nav className="navbar navbar-expand-md fixed-top">
@@ -51,7 +53,7 @@ function AdminNavBar({ handleClick, isLoggedIn }) {
                   className="nav-link"
                   to="/admin/login"
                   onClick={() => {
-                    handleClick(navigate);
+                    handleClick();
                     localStorage.removeItem('token');
                   }}
                 >

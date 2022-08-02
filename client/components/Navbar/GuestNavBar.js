@@ -1,7 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
+function GuestNavBar({ handleClick, isLoggedIn, cart }) {
+  const getCount = () => {
+    let count = 0;
+    if (cart.products !== null) {
+      Object.entries(cart.products).forEach((productArray) => {
+        count += productArray[1];
+      });
+    }
+
+    return count;
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-md fixed-top">

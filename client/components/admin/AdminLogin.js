@@ -8,7 +8,6 @@ function AdminLogin() {
     email: '',
     password: '',
   });
-  console.log({ formData });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

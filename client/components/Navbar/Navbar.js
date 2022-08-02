@@ -13,26 +13,14 @@ function Navbar() {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const getCount = () => {
-    let count = 0;
-    if (cart.products !== null) {
-      Object.entries(cart.products).forEach((productArray) => {
-        count += productArray[1];
-      });
-    }
-
-    return count;
-  };
-
-  const handleClick = (navigate) => {
-    dispatch(logout(navigate));
+  const handleClick = () => {
+    dispatch(logout());
     dispatch(clearCart());
   };
 
   const isLoggedIn = !!auth.token;
-
+  console.log({ isLoggedIn });
   return (
     <div>
       {auth.isAdmin ? (
@@ -41,7 +29,7 @@ function Navbar() {
         <GuestNavBar
           handleClick={handleClick}
           isLoggedIn={isLoggedIn}
-          getCount={getCount}
+          cart={cart}
         />
       )}
     </div>
