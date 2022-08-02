@@ -79,7 +79,9 @@ function Cart() {
             );
             return (
               <div key={product.id} className="cart-item">
-                <img className="cart-item-image" src={product.imgUrl} />
+                <Link to={`/products/${product.id}`}>
+                  <img className="cart-item-image" src={product.imgUrl} />
+                </Link>
                 <p>{product.title}</p>
 
                 <p>Quantity: {productArray[1]}</p>
