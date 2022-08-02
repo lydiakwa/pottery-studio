@@ -13,32 +13,30 @@ function AllUsers() {
 
   return (
     <div className="container">
-      <div>
-        <h2>All Users</h2>
+      <h2>All Users</h2>
 
-        <table className="table mt-5">
-          <thead>
-            <tr>
-              {/* <th scope="col">#</th> */}
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Address</th>
+      <table className="table mt-5">
+        <thead>
+          <tr>
+            {/* <th scope="col">#</th> */}
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              {/* <th scope="row">{user.id}</th> */}
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.email}</td>
+              <td>{user.address}</td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                {/* <th scope="row">{user.id}</th> */}
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>{user.address}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
