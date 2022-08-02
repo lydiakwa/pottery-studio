@@ -6,6 +6,7 @@ import { autoLogin, logout } from '../../store/auth';
 import { clearCart } from '../../store/cart';
 
 import GuestNavBar from './GuestNavBar';
+import UserNavBar from './UserNavBar';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -150,21 +151,7 @@ class Navbar extends React.Component {
                 </Link>
 
                 <ul className="navbar-nav">
-                  {this.props.isLoggedIn ? (
-                    <Link className="nav-link" to="/">
-                      <button
-                        onClick={() => {
-                          this.props.handleClick();
-                          localStorage.removeItem('token');
-                          localStorage.removeItem('cart');
-                        }}
-                      >
-                        Logout <i class="bi bi-box-arrow-right"></i>
-                      </button>
-                    </Link>
-                  ) : (
-                    <GuestNavBar />
-                  )}
+                  {this.props.isLoggedIn ? <UserNavBar /> : <GuestNavBar />}
 
                   <li className="nav-item">
                     <Link className="nav-link" to="/cart">
