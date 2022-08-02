@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
+function AdminNavBar({ handleClick, isLoggedIn }) {
   return (
     <div>
       <nav className="navbar navbar-expand-md fixed-top">
@@ -29,18 +29,8 @@ function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/shop">
-                Shop
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/aboutus">
-                About Us
+              <Link className="nav-link" to="/admin">
+                Admin Home
               </Link>
             </li>
           </ul>
@@ -56,17 +46,18 @@ function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
 
           <ul className="navbar-nav">
             {isLoggedIn ? (
-              <Link className="nav-link" to="/">
-                <button
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/admin/login"
                   onClick={() => {
                     handleClick();
                     localStorage.removeItem('token');
-                    localStorage.removeItem('cart');
                   }}
                 >
                   Logout <i class="bi bi-box-arrow-right"></i>
-                </button>
-              </Link>
+                </Link>
+              </li>
             ) : (
               <>
                 <li className="nav-item">
@@ -74,23 +65,8 @@ function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
                     Login
                   </Link>
                 </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link" to="/signup">
-                    Sign Up
-                  </Link>
-                </li>
               </>
             )}
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                <i className="bi bi-cart"></i>
-                <sup>
-                  <span className="badge bg-dark">{getCount()}</span>
-                </sup>
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>
@@ -98,4 +74,4 @@ function GuestNavBar({ handleClick, isLoggedIn, getCount }) {
   );
 }
 
-export default GuestNavBar;
+export default AdminNavBar;
