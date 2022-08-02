@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Home from '../client/components/Home';
 import AboutUs from '../client/components/AboutUs';
-import Navbar from '../client/components/Navbar';
+import Navbar from '../client/components/Navbar/Navbar';
 import AllProducts from '../client/components/AllProducts';
 import SingleProduct from '../client/components/SingleProduct';
 import Login from '../client/components/Login';

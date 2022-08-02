@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { autoLogin, logout } from '../store/auth';
-import { clearCart } from '../store/cart';
+
+import { autoLogin, logout } from '../../store/auth';
+import { clearCart } from '../../store/cart';
+
+import GuestNavBar from './GuestNavBar';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -160,19 +163,7 @@ class Navbar extends React.Component {
                       </button>
                     </Link>
                   ) : (
-                    <>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/login">
-                          Login
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/signup">
-                          Sign Up
-                        </Link>
-                      </li>
-                    </>
+                    <GuestNavBar />
                   )}
 
                   <li className="nav-item">
