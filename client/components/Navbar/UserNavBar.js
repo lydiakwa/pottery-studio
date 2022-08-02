@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function UserNavBar() {
+function UserNavBar({ handleClick }) {
   return (
     <Link className="nav-link" to="/">
       <button
         onClick={() => {
-          this.props.handleClick();
+          handleClick();
           localStorage.removeItem('token');
           localStorage.removeItem('cart');
         }}
