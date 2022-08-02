@@ -14,7 +14,6 @@ export const logout = () => {
 export const loginUser = (formData, navigate) => {
   return async (dispatch) => {
     try {
-      console.log({ formData });
       const { data } = await axios.post('/api/auth/login', formData);
       dispatch(setAuth(data.user));
       localStorage.setItem('token', data.user.token);

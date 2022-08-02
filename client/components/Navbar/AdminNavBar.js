@@ -51,7 +51,7 @@ function AdminNavBar({ handleClick, isLoggedIn }) {
                   className="nav-link"
                   to="/admin/login"
                   onClick={() => {
-                    handleClick();
+                    handleClick(navigate);
                     localStorage.removeItem('token');
                   }}
                 >

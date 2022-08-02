@@ -35,7 +35,6 @@ form div {
 .navbar {
   height: 75px;
   background-image: linear-gradient(to right, #e7dbc7, #dec2a3);
-  opacity: 0.9;
 }
 
 .nav-link {
