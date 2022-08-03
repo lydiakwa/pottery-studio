@@ -454,7 +454,7 @@ ion-icon:active {
   color: #d39850;
 }
 
-/* ADMIN PROFUCT FORM */
+/* ADMIN PRODUCT FORM */
 .product-form-container .form-label {
   font-weight: bold;
 }
@@ -462,6 +462,16 @@ ion-icon:active {
 .product-form-container .btn:hover {
   background-color: white;
   color: #d39850;
+}
+
+.product-form-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-header {
+  text-align: center;
+  padding-top: 15px;
 }
 
 /* ALL PRODUCTS */

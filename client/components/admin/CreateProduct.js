@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { autoLogin } from '../../store/auth';
 import { createProduct } from '../../store/products';
-import ProductForm from './ProductForm'
+// import ProductForm from './ProductForm'
 
 class CreateProduct extends React.Component {
   constructor() {
@@ -29,7 +29,7 @@ class CreateProduct extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.createProduct(this.state, this.props.history);
-    console.log('CREATE', this.state)
+    console.log('CREATE', this.state);
     this.setState({
       title: '',
       price: 0,
@@ -46,9 +46,10 @@ class CreateProduct extends React.Component {
       this.state;
 
     return (
-      <ProductForm title={title} price={price} description={description} type={type} quantity={quantity} colour={colour} imgUrl={imgUrl} handleChange={this.handleChange} handleSubmit={this.handleSubmit} buttonName={'Create'}/>
-    )
-    }
+      <div>temp</div>
+      // <ProductForm title={title} price={price} description={description} type={type} quantity={quantity} colour={colour} imgUrl={imgUrl} handleChange={this.handleChange} handleSubmit={this.handleSubmit} buttonName={'Create'}/>
+    );
+  }
 }
 
 const mapState = (state) => ({
