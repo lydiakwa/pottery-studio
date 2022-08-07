@@ -2,52 +2,54 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import CreateProduct from '../admin/CreateProduct';
-
 import { deleteProduct } from '../../store/products';
 
-function AdminProducts({ products, handleIncrement }) {
+function AdminProducts({ products }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="product-list">
-      <ul>
-        {products.map((product) => (
-          <div key={product.id}>
-            <div>
-              <p className="title">Title: {product.title}</p>
+    <div>
+      <Link to="/products/create" className="btn btn-dark" id="edit-button">
+        Create a Product
+      </Link>
+      <div className="product-list">
+        <ul>
+          {products.map((product) => (
+            <div key={product.id}>
+              <div>
+                <p className="title">Title: {product.title}</p>
 
-              <Link to={`/products/${product.id}`}>
-                <img className="list-image" src={product.imgUrl} />
-              </Link>
+                <Link to={`/products/${product.id}`}>
+                  <img className="list-image" src={product.imgUrl} />
+                </Link>
 
-              <p className="price">Price: {product.price}</p>
-              <p className="quantity">quantity: {product.quantity}</p>
-            </div>
+                <p className="price">Price: {product.price}</p>
+                <p className="quantity">quantity: {product.quantity}</p>
+              </div>
 
-            <div className="d-flex justify-content-between">
-              <Link to={`/products/${product.id}/edit`}>
-                <button id="edit-button" className="btn btn-dark" type="button">
-                  Edit
+              <div className="d-flex justify-content-between">
+                <Link to={`/products/${product.id}/edit`}>
+                  <button
+                    id="edit-button"
+                    className="btn btn-dark"
+                    type="button"
+                  >
+                    Edit
+                  </button>
+                </Link>
+
+                <button
+                  className="btn btn-outline-danger"
+                  type="button"
+                  onClick={() => dispatch(deleteProduct(product.id))}
+                >
+                  <i className="bi bi-trash"></i>
                 </button>
-              </Link>
-
-              <button
-                className="btn btn-outline-danger"
-                type="button"
-                onClick={() => dispatch(deleteProduct(product.id))}
-              >
-                <i className="bi bi-trash"></i>
-              </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </ul>
-      <h2>Add a new product:</h2>
-      <CreateProduct products={products} handleIncrement={handleIncrement} />
-      {/* <Link to='/products/create'>
-                      <button>Create a new product</button>
-                    </Link> */}
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

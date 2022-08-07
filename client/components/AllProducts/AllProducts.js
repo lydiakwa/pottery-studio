@@ -32,7 +32,7 @@ function AllProducts() {
     <div>
       <h2 id="all-products-title">Products</h2>
       {auth.isAdmin === true ? (
-        <AdminProducts products={products} handleIncrement={handleIncrement} />
+        <AdminProducts products={products} />
       ) : (
         <GuestProducts products={products} handleIncrement={handleIncrement} />
       )}

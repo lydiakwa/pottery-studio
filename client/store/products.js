@@ -32,7 +32,7 @@ export const fetchProducts = () => {
   };
 };
 
-export const createProduct = (product, history) => {
+export const createProduct = (product, navigate) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
@@ -42,7 +42,7 @@ export const createProduct = (product, history) => {
         },
       });
       dispatch(createdProduct(created));
-      history.push('/shop');
+      navigate('/shop');
     } catch (err) {
       console.log(err);
     }
