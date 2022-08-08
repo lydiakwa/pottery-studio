@@ -11,14 +11,15 @@ export const setGuest = (user) => {
   };
 };
 
-export const checkout = (guestCart, history) => {
+export const checkout = (guestCart, navigate) => {
   return async (dispatch) => {
     try {
+      console.log({ guestCart });
       const { data } = await axios.post('/api/guest', guestCart);
       console.log('confirmation', data);
       dispatch(setGuest(data.user));
       // dispatch(setCart(data.cart));
-      history.push('/confirmation');
+      navigate('/confirmation');
     } catch (err) {
       console.log(err);
     }

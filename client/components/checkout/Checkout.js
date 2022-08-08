@@ -22,7 +22,7 @@ function Checkout() {
     <div className="container">
       <h1 id="checkout-title">Checkout</h1>
       <div className="checkout-container">
-        <PurchaseForm cart={cart.products} navigate={navigate} />
+        <PurchaseForm cart={cart} navigate={navigate} />
         <CheckoutCart cart={cart.products} products={products} />
       </div>
     </div>

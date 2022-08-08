@@ -1,155 +1,129 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { checkout } from '../../store/guest';
 import { userCheckout } from '../../store/cart';
 
-class PurchaseForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      firstName: '',
-      lastName: '',
-      addressLine: '',
-      country: '',
-      zip: '',
-      state: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function PurchaseForm({ cart, navigate }) {
+  const [formState, setFormState] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    addressLine: '',
+    country: '',
+    zip: '',
+    state: '',
+  });
 
-  handleChange(event) {
-    this.setState({
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleChange = (event) => {
+    setFormState({
+      ...formState,
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     const token = localStorage.getItem('token');
     if (token) {
-      this.props.userCheckout(
-        token,
-        this.props.cart.cartId,
-        this.props.history
-      );
+      dispatch(userCheckout(token, cart.cartId, navigate));
     } else {
       //this is for guests, it creates an entry in the DB for them to save their cart
-      this.props.checkout(
-        {
-          user: {
-            email: this.state.email,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: `${this.state.addressLine}, ${this.state.state} ${this.state.zip}, ${this.state.country} `,
+      dispatch(
+        checkout(
+          {
+            user: {
+              email: formState.email,
+              firstName: formState.firstName,
+              lastName: formState.lastName,
+              address: `${formState.addressLine}, ${formState.state} ${formState.zip}, ${formState.country} `,
+            },
+            cart: cart,
           },
-          cart: this.props.cart,
-        },
-        this.props.history
+          navigate
+        )
       );
     }
-  }
+  };
 
-  render() {
-    const { email, firstName, lastName, addressLine, country, zip, state } =
-      this.state;
-    console.log(this.props.user);
-    return (
-      <div className="purchase-form-container">
-        <form className="purchase-form" onSubmit={this.handleSubmit}>
-          <div className="form-fields">
-            <label>Email</label>
+  return (
+    <div className="purchase-form-container">
+      <form className="purchase-form" onSubmit={handleSubmit}>
+        <div className="form-fields">
+          <label>Email</label>
+          <input
+            name="email"
+            className="form-control"
+            onChange={handleChange}
+            value={user.email !== null ? user.email : email}
+          />
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>First Name</label>
             <input
-              name="email"
+              name="firstName"
               className="form-control"
-              onChange={this.handleChange}
-              value={
-                this.props.user.email !== null ? this.props.user.email : email
-              }
+              onChange={handleChange}
+              value={user.firstName !== null ? user.firstName : firstName}
             />
           </div>
-          <div className="row">
-            <div className="col">
-              <label>First Name</label>
-              <input
-                name="firstName"
-                className="form-control"
-                onChange={this.handleChange}
-                value={
-                  this.props.user.firstName !== null
-                    ? this.props.user.firstName
-                    : firstName
-                }
-              />
-            </div>
 
-            <div className="col">
-              <label>Last Name</label>
-              <input
-                name="lastName"
-                className="form-control"
-                onChange={this.handleChange}
-                value={
-                  this.props.user.lastName !== null
-                    ? this.props.user.lastName
-                    : lastName
-                }
-              />
-            </div>
-          </div>
-          <div className="form-fields">
-            <label>Address Line</label>
+          <div className="col">
+            <label>Last Name</label>
             <input
-              name="addressLine"
+              name="lastName"
               className="form-control"
-              onChange={this.handleChange}
-              value={addressLine}
+              onChange={handleChange}
+              value={user.lastName !== null ? user.lastName : lastName}
             />
           </div>
-          <div className="form-fields">
-            <label>Country</label>
-            <input
-              name="country"
-              className="form-control"
-              onChange={this.handleChange}
-              value={country}
-            />
-          </div>
-          <div className="form-fields">
-            <label>Zip</label>
-            <input
-              name="zip"
-              className="form-control"
-              onChange={this.handleChange}
-              value={zip}
-            />
-          </div>
-          <div className="form-fields">
-            <label>State</label>
-            <input
-              name="state"
-              className="form-control"
-              onChange={this.handleChange}
-              value={state}
-            />
-          </div>
-          <button className="btn btn-dark" type="submit">
-            Checkout
-          </button>
-        </form>
-      </div>
-    );
-  }
+        </div>
+        <div className="form-fields">
+          <label>Address Line</label>
+          <input
+            name="addressLine"
+            className="form-control"
+            onChange={handleChange}
+            value={formState.addressLine}
+          />
+        </div>
+        <div className="form-fields">
+          <label>Country</label>
+          <input
+            name="country"
+            className="form-control"
+            onChange={handleChange}
+            value={formState.country}
+          />
+        </div>
+        <div className="form-fields">
+          <label>Zip</label>
+          <input
+            name="zip"
+            className="form-control"
+            onChange={handleChange}
+            value={formState.zip}
+          />
+        </div>
+        <div className="form-fields">
+          <label>State</label>
+          <input
+            name="state"
+            className="form-control"
+            onChange={handleChange}
+            value={formState.state}
+          />
+        </div>
+        <button className="btn btn-dark" type="submit">
+          Checkout
+        </button>
+      </form>
+    </div>
+  );
 }
 
-const mapState = (state) => {
-  return {
-    cart: state.cart,
-    user: state.auth,
-  };
-};
-const mapDispatch = { checkout, userCheckout };
-
-export default connect(mapState, mapDispatch)(PurchaseForm);
+export default PurchaseForm;
