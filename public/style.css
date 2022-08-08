@@ -453,6 +453,13 @@ ion-icon:active {
   background-color: white;
   color: #d39850;
 }
+#add-product-button {
+  margin: 10px;
+}
+#add-product-button:hover {
+  background-color: white;
+  color: #d39850;
+}
 
 /* ADMIN PRODUCT FORM */
 .product-form-container .form-label {

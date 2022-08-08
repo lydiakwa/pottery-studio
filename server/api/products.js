@@ -23,9 +23,8 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST api/products
-router.post('/', requireToken, async (req, res, next) => {
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
   try {
-    console.log('body--', req.body);
     const newProduct = await Product.create(req.body);
     res.status(201).json(newProduct);
   } catch (error) {

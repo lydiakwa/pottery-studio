@@ -9,7 +9,11 @@ function AdminProducts({ products }) {
 
   return (
     <div>
-      <Link to="/products/create" className="btn btn-dark" id="edit-button">
+      <Link
+        to="/products/create"
+        className="btn btn-dark"
+        id="add-product-button"
+      >
         Create a Product
       </Link>
       <div className="product-list">
