@@ -36,12 +36,12 @@ export const createProduct = (product, navigate) => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
-      const { data: created } = await axios.post('api/products', product, {
+      const { data } = await axios.post('/api/products', product, {
         headers: {
           authorization: token,
         },
       });
-      dispatch(createdProduct(created));
+      dispatch(createdProduct(data));
       navigate('/shop');
     } catch (err) {
       console.log(err);

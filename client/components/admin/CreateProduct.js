@@ -12,7 +12,6 @@ function CreateProduct() {
     quantity: 0,
     colour: '',
     imgUrl: '',
-    id: 0,
   });
 
   return (

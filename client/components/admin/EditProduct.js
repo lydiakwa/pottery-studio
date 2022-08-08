@@ -22,7 +22,6 @@ function EditProduct() {
     quantity: 0,
     colour: '',
     imgUrl: '',
-    id: 0,
   });
 
   const dispatch = useDispatch();
