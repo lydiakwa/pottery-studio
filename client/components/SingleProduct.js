@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { fetchSingleProduct } from '../store/singleProduct';
 import { incrementItem, updateCart } from '../store/cart';
@@ -8,6 +8,8 @@ import { incrementItem, updateCart } from '../store/cart';
 function SingleProduct() {
   const cart = useSelector((state) => state.cart);
   const product = useSelector((state) => state.singleProduct);
+  const auth = useSelector((state) => state.auth);
+
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { id: urlId } = useParams();
@@ -66,13 +68,18 @@ function SingleProduct() {
               onChange={handleChange}
             ></input>
           </div>
-
-          <button
-            className="btn btn-dark"
-            onClick={() => handleIncrement(product)}
-          >
-            ADD TO CART <i className="bi bi-cart"></i>
-          </button>
+          {auth.isAdmin ? (
+            <Link to={`/products/${product.id}/edit`}>
+              <button className="btn btn-dark">Edit</button>
+            </Link>
+          ) : (
+            <button
+              className="btn btn-dark"
+              onClick={() => handleIncrement(product)}
+            >
+              ADD TO CART <i className="bi bi-cart"></i>
+            </button>
+          )}
 
           <div className="description">
             <p>
