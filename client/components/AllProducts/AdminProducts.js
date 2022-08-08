@@ -17,7 +17,7 @@ function AdminProducts({ products }) {
         Create a Product
       </Link>
       <div className="product-list">
-        <div className="row row-cols-1 row-cols-md-3 g-3">
+        <div className="row row-cols-1 row-cols-md-4 g-3">
           {products.map((product) => (
             <div className="col" key={product.id}>
               <div className="card text-center border-dark mb-3 ">
@@ -27,7 +27,7 @@ function AdminProducts({ products }) {
                     <img className="card-img-top" src={product.imgUrl} />
                   </Link>
 
-                  <p className="price">Price: {product.price}</p>
+                  <p className="price">Price: ${product.price}</p>
                   <p className="quantity">quantity: {product.quantity}</p>
                 </div>
                 <div className="card-footer">

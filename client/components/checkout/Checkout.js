@@ -1,42 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import PurchaseForm from './PurchaseForm';
 import CheckoutCart from './CheckoutCart';
 
 import { fetchProducts } from '../../store/products';
 
-class Checkout extends React.Component {
-  componentDidMount() {
-    this.props.getProducts();
-  }
+function Checkout() {
+  const cart = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.products);
 
-  render() {
-    return (
-      <div className="container">
-        <h1 id="checkout-title">Checkout</h1>
-        <div className="checkout-container">
-          <PurchaseForm
-            cart={this.props.cart.products}
-            history={this.props.history}
-          />
-          <CheckoutCart
-            cart={this.props.cart.products}
-            products={this.props.products}
-          />
-        </div>
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  return (
+    <div className="container">
+      <h1 id="checkout-title">Checkout</h1>
+      <div className="checkout-container">
+        <PurchaseForm cart={cart.products} navigate={navigate} />
+        <CheckoutCart cart={cart.products} products={products} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapState = (state) => ({
-  cart: state.cart,
-  products: state.products,
-});
-
-const mapDispatch = (dispatch) => ({
-  getProducts: () => dispatch(fetchProducts()),
-});
-
-export default connect(mapState, mapDispatch)(Checkout);
+export default Checkout;

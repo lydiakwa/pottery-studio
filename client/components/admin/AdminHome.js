@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 function AdminHome() {
-  const auth = useSelector((state) => state.auth);
-
   return (
     <div className="admin-home-container">
       <div className="row d-flex justify-content-center">
