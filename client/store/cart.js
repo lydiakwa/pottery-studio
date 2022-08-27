@@ -82,7 +82,7 @@ export const updateCart = (token, cartId, productId, quantity) => {
   };
 };
 
-export const userCheckout = (token, cartId, history) => {
+export const userCheckout = (token, cartId, navigate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(`/api/cart/${cartId}/checkout`, null, {
@@ -95,7 +95,7 @@ export const userCheckout = (token, cartId, history) => {
         products: {},
       };
       dispatch(setCart(cart));
-      history.push('/confirmation');
+      navigate('/confirmation');
     } catch (err) {
       console.log(err);
     }

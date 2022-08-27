@@ -24,7 +24,7 @@ export const getUserOrder = (token) => {
     for (const product of data.cart_products) {
       order.products[product.productId] = product.quantity;
     }
-
+    console.log({ order });
     dispatch(setOrder(order));
 
     try {
