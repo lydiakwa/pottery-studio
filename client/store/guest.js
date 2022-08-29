@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// import { setCart } from './cart';
+import { setCart } from './cart';
 
 const SET_GUEST = 'SET_GUEST';
 
@@ -15,8 +15,15 @@ export const checkout = (guestCart, navigate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post('/api/guest', guestCart);
+
       dispatch(setGuest(data.user));
-      // dispatch(setCart(data.cart));
+      localStorage.removeItem('cart');
+      const cart = {
+        cartId: null,
+        isCart: true,
+        products: {},
+      };
+      dispatch(setCart(cart));
       navigate('/confirmation');
     } catch (err) {
       console.log(err);
