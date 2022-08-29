@@ -11,7 +11,8 @@ function CreateProduct() {
     type: '',
     quantity: 0,
     colour: '',
-    imgUrl: '',
+    imgUrl:
+      'https://ferrettools.com/wp-content/plugins/elementor/assets/images/placeholder.png',
   });
 
   return (

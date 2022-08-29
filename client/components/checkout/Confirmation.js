@@ -13,11 +13,11 @@ function Confirmation() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-    const token = localStorage.getItem('token');
-    if (token) {
-      dispatch(getUserOrder(token));
-    }
   }, []);
+
+  useEffect(() => {
+    dispatch(getUserOrder(guest.token));
+  }, [guest.token]);
 
   if (products.length === 0) {
     return <div>Nothing to see here!</div>;

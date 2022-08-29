@@ -20,6 +20,7 @@ export const getUserOrder = (token) => {
       cartId: data.cartId,
       products: {},
     };
+    console.log('cart products', data.cart_products);
 
     for (const product of data.cart_products) {
       order.products[product.productId] = product.quantity;
