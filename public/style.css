@@ -309,6 +309,13 @@ ion-icon:active {
 }
 
 /* SIGN UP PAGE */
+/* FORM VALIDATION */
+.field-error-text {
+  color: red;
+  font-style: italic;
+  font-size: 75%;
+}
+
 .signup-form-container {
   display: flex;
   flex-direction: column;

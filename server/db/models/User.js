@@ -19,8 +19,8 @@ const User = db.define('user', {
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   password: {
     type: STRING,
@@ -33,7 +33,7 @@ const User = db.define('user', {
   },
   isAdmin: {
     type: BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   token: {
     type: VIRTUAL,
@@ -95,6 +95,7 @@ User.prototype.toJSON = function () {
     firstName: this.firstName,
     lastName: this.lastName,
     isAdmin: this.isAdmin,
+    address: this.address,
   };
 };
 
