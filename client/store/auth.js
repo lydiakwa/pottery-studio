@@ -11,7 +11,7 @@ export const logout = () => {
   return { type: CLEAR_AUTH };
 };
 
-export const loginUser = (formData, navigate) => {
+export const loginUser = (formData, navigate, setErrors) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post('/api/auth/login', formData);
@@ -34,7 +34,9 @@ export const loginUser = (formData, navigate) => {
         navigate('/');
       }
     } catch (err) {
-      console.log('redux store', err);
+      if (err.response.data === 'bad credentials') {
+        setErrors({ form: 'Incorrect password or email' });
+      }
     }
   };
 };

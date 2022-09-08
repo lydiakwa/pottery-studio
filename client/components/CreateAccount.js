@@ -7,12 +7,6 @@ import { createUser } from '../store/auth';
 
 //add isAdmin -- and set default to false
 function CreateAccount() {
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,7 +32,6 @@ function CreateAccount() {
           if (!values.firstName) {
             errors.firstName = 'Required';
           }
-          console.log(errors);
           return errors;
         }}
       >
