@@ -21,7 +21,9 @@ function CreateAccount() {
       <h2 id="create-account-title">Create Account</h2>
       <Formik
         initialValues={{ email: '', password: '', firstName: '', lastName: '' }}
-        onSubmit={(values) => dispatch(createUser(values, navigate))}
+        onSubmit={(values, { setErrors }) =>
+          dispatch(createUser(values, navigate, setErrors))
+        }
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -36,6 +38,7 @@ function CreateAccount() {
           if (!values.firstName) {
             errors.firstName = 'Required';
           }
+          console.log(errors);
           return errors;
         }}
       >
@@ -50,11 +53,12 @@ function CreateAccount() {
                   className="form-control"
                   name="firstName"
                   type="text"
+                  error={!!errors.firstName}
                   onChange={handleChange}
                   value={values.firstName}
                 />
                 {errors.firstName ? (
-                  <label className="field-error-text">{errors.firstName}</label>
+                  <div className="field-error-text">{errors.firstName}</div>
                 ) : null}
               </div>
               <div className="col">
@@ -66,11 +70,12 @@ function CreateAccount() {
                   className="form-control"
                   name="lastName"
                   type="text"
+                  error={!!errors.lastName}
                   onChange={handleChange}
                   value={values.lastName}
                 />
                 {errors.lastName ? (
-                  <label className="field-error-text">{errors.lastName}</label>
+                  <div className="field-error-text">{errors.lastName}</div>
                 ) : null}
               </div>
             </div>
@@ -84,11 +89,12 @@ function CreateAccount() {
                   className="form-control"
                   name="email"
                   type="text"
+                  error={!!errors.email}
                   onChange={handleChange}
                   value={values.email}
                 />
                 {errors.email ? (
-                  <label className="field-error-text">{errors.email}</label>
+                  <div className="field-error-text">{errors.email}</div>
                 ) : null}
               </div>
               <div className="col">
@@ -98,12 +104,13 @@ function CreateAccount() {
                 <input
                   className="form-control"
                   name="password"
-                  type="text"
+                  type="password"
+                  error={!!errors.password}
                   onChange={handleChange}
                   value={values.password}
                 />
                 {errors.password ? (
-                  <label className="field-error-text">{errors.password}</label>
+                  <div className="field-error-text">{errors.password}</div>
                 ) : null}
               </div>
             </div>

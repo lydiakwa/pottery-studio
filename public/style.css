@@ -314,6 +314,7 @@ ion-icon:active {
   color: red;
   font-style: italic;
   font-size: 75%;
+  margin: 1px;
 }
 
 .signup-form-container {

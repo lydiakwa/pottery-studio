@@ -17,9 +17,13 @@ const User = db.define('user', {
   email: {
     type: STRING,
     allowNull: false,
-    unique: true,
+    unique: {
+      msg: 'Email is already in use',
+    },
     validate: {
-      isEmail: true,
+      isEmail: {
+        msg: 'Must be a valid email',
+      },
     },
   },
   password: {

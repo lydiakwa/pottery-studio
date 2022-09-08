@@ -67,7 +67,7 @@ export const autoLogin = (token) => {
 };
 
 //creates a new user in the uesr model
-export const createUser = (user, navigate) => {
+export const createUser = (user, navigate, setErrors) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post('/api/users', user);
@@ -89,6 +89,7 @@ export const createUser = (user, navigate) => {
       navigate('/');
     } catch (err) {
       console.log(err);
+      setErrors({ email: err.response.data });
     }
   };
 };
