@@ -35,7 +35,9 @@ export const loginUser = (formData, navigate, setErrors) => {
       }
     } catch (err) {
       if (err.response.data === 'bad credentials') {
-        setErrors({ form: 'Incorrect password or email' });
+        setErrors({ form: 'Incorrect password or does not match email' });
+      } else if (err.response.data.message === 'Email does not exist') {
+        setErrors({ form: err.response.data.message });
       }
     }
   };

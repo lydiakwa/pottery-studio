@@ -19,7 +19,11 @@ router.post('/login', async (req, res, next) => {
     });
     res.json({ user: user, cart: cart });
   } catch (err) {
-    next(err);
+    if (err.name === 'TypeError') {
+      res.status(400).json({ message: 'Email does not exist' });
+    } else {
+      next(err);
+    }
   }
 });
 
