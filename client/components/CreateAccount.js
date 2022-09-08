@@ -16,15 +16,6 @@ function CreateAccount() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleChange = (evt) => {
-  //   setFormState({ ...formState, [evt.target.name]: evt.target.value });
-  // };
-
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   dispatch(createUser(formState, navigate));
-  // };
-
   return (
     <div className="contianer signup-form-container">
       <h2 id="create-account-title">Create Account</h2>
@@ -78,6 +69,9 @@ function CreateAccount() {
                   onChange={handleChange}
                   value={values.lastName}
                 />
+                {errors.lastName ? (
+                  <label className="field-error-text">{errors.lastName}</label>
+                ) : null}
               </div>
             </div>
 
@@ -93,6 +87,9 @@ function CreateAccount() {
                   onChange={handleChange}
                   value={values.email}
                 />
+                {errors.email ? (
+                  <label className="field-error-text">{errors.email}</label>
+                ) : null}
               </div>
               <div className="col">
                 <label htmlFor="password" className="form-label">
@@ -105,6 +102,9 @@ function CreateAccount() {
                   onChange={handleChange}
                   value={values.password}
                 />
+                {errors.password ? (
+                  <label className="field-error-text">{errors.password}</label>
+                ) : null}
               </div>
             </div>
 
