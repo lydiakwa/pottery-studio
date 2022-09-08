@@ -34,7 +34,7 @@ export const loginUser = (formData, navigate) => {
         navigate('/');
       }
     } catch (err) {
-      console.log(err);
+      console.log('redux store', err);
     }
   };
 };
@@ -88,7 +88,7 @@ export const createUser = (user, navigate, setErrors) => {
       localStorage.setItem('token', data.user.token);
       navigate('/');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setErrors({ email: err.response.data });
     }
   };

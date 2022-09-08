@@ -66,20 +66,23 @@ User.byToken = async (token) => {
 //checks if the user exists via email (should be unique) and returns the whole
 //user object back
 User.authenticate = async ({ email, password }) => {
-  const user = await User.findOne({
-    where: {
-      email,
-    },
-  });
-  if (user) {
-    const isValid = await bcrypt.compare(password, user.password);
-    if (isValid) {
-      return user;
+  try {
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (user) {
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        return user;
+      }
     }
+  } catch (err) {
+    const error = Error('bad credentials');
+    error.status = 401;
+    throw error;
   }
-  const error = Error('bad credentials');
-  error.status(401);
-  throw error;
 };
 
 //hook - before user is created, password is hashed
