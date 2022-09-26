@@ -34,6 +34,7 @@ function CreateAccount() {
           }
           return errors;
         }}
+        validateOnChange={false}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <form className="signup-form" onSubmit={handleSubmit}>

@@ -22,7 +22,7 @@ function GuestProducts({ products, handleIncrement }) {
                 // need to check if item already exists in localStorage.
                 onClick={() => handleIncrement(product)}
               >
-                Purchase
+                Add to Cart
               </button>
             </div>
           </div>

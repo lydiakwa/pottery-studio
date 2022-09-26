@@ -4,7 +4,7 @@ As part of the Grace Hopper Program, we designed and built an e-commerce site us
 
 ## Website Demo
 
-You can visit and demo the site here: https://grace-shopper-pottery-studio.herokuapp.com/
+You can visit and demo the site here: https://pottery-studio.fly.dev/
 
 1. home page > shop view > single view > add to cart
 2. Login > cart is persistent > edit cart
